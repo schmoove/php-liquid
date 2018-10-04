@@ -498,7 +498,7 @@ class StandardFilters
 	 *
 	 * @return array|\Iterator|string
 	 */
-	public static function slice($input, $offset, $length = null)
+	public static function slice($input, $offset = 0, $length = 1)
 	{
 		if ($input instanceof \Iterator) {
 			$input = iterator_to_array($input);
