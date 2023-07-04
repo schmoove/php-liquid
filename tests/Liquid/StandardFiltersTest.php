@@ -99,6 +99,8 @@ class StandardFiltersTest extends TestCase
 		$data = array(
 			'UpperCaseMiXed' => 'uppercasemixed',
 			3 => 3,
+			// UTF-8
+			'Владимир' => 'владимир'
 		);
 
 		foreach ($data as $element => $expected) {
@@ -111,6 +113,8 @@ class StandardFiltersTest extends TestCase
 		$data = array(
 			'UpperCaseMiXed' => 'UPPERCASEMIXED',
 			3 => 3,
+			// UTF-8
+			'владимир' => 'ВЛАДИМИР'
 		);
 
 		foreach ($data as $element => $expected) {
@@ -124,6 +128,8 @@ class StandardFiltersTest extends TestCase
 			'one Word not' => 'One Word Not',
 			'1test' => '1Test',
 			'' => '',
+			// UTF-8
+			'владимир владимирович' => 'Владимир Владимирович'
 		);
 
 		foreach ($data as $element => $expected) {
@@ -434,6 +440,9 @@ class StandardFiltersTest extends TestCase
 
 		// Custom ending
 		$this->assertEquals('abcend', StandardFilters::truncate('abcdef', 3, 'end'));
+
+		// UTF-8
+		$this->assertEquals('Влад...', StandardFilters::truncate('Владимир Владимирович', 4));
 	}
 
 	public function testTruncateWords()
@@ -783,7 +792,11 @@ class StandardFiltersTest extends TestCase
 		$data = array(
 			array(
 				'',
-				array(0 => ''),
+				array(),
+			),
+			array(
+				null,
+				array(),
 			),
 			array(
 				'two-one-three',
@@ -883,7 +896,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[2], StandardFilters::plus($item[0], $item[1]), '', 0.00001);
+			$this->assertEqualsWithDelta($item[2], StandardFilters::plus($item[0], $item[1]), 0.00001);
 		}
 	}
 
@@ -913,7 +926,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[2], StandardFilters::minus($item[0], $item[1]), '', 0.00001);
+			$this->assertEqualsWithDelta($item[2], StandardFilters::minus($item[0], $item[1]), 0.00001);
 		}
 	}
 
@@ -943,7 +956,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[2], StandardFilters::times($item[0], $item[1]), '', 0.00001);
+			$this->assertEqualsWithDelta($item[2], StandardFilters::times($item[0], $item[1]), 0.00001);
 		}
 	}
 
@@ -973,7 +986,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[2], StandardFilters::divided_by($item[0], $item[1]), '', 0.00001);
+			$this->assertEqualsWithDelta($item[2], StandardFilters::divided_by($item[0], $item[1]), 0.00001);
 		}
 	}
 
@@ -1008,7 +1021,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[2], StandardFilters::modulo($item[0], $item[1]), '', 0.00001);
+			$this->assertEqualsWithDelta($item[2], StandardFilters::modulo($item[0], $item[1]), 0.00001);
 		}
 	}
 
