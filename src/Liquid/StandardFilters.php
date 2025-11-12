@@ -558,6 +558,9 @@ class StandardFilters
 		if ($input instanceof \Iterator) {
 			$input = iterator_to_array($input);
 		}
+		if ( $offset === 0 && !$length ) {
+			$length = 1;
+		}
 		if (is_array($input)) {
 			$input = array_slice($input, $offset, $length);
 		} elseif (is_string($input)) {
