@@ -113,6 +113,13 @@ Adding filters has never been easier.
 	));
 	// expect: https://www.example.com/test
 
+### Custom tags
+
+Creating custom tags is straightforward, just define a class extending AbstractBlock, and pass it to registerTag.
+
+	See examples/tags.php
+
+
 ## Requirements
 
  * PHP 7.0+
